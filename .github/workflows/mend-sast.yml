@@ -1,0 +1,19 @@
+name: Mend SAST Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  mend-sast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Mend SAST
+        uses: mend-toolkit/mend-sast-action@v2
+        with:
+          api-key: ${{ secrets.MEND_API_KEY }}
